@@ -9,7 +9,7 @@ public class ColorPaletteTests
     public void palette_with_valid_colors_creates()
     {
         var palette = new ColorPalette(new List<RgbColor> { new RgbColor(0, 0, 0) }, "Test");
-        Assert.Equal(1, palette.Colors.Count);
+        Assert.Single(palette.Colors);
         Assert.Equal("Test", palette.Name);
     }
 
@@ -17,7 +17,7 @@ public class ColorPaletteTests
     public void palette_cannot_have_null_name()
     {
         Assert.Throws<ArgumentNullException>(() => 
-            new ColorPalette(new List<RgbColor> { new RgbColor(0, 0, 0) }, null));
+            new ColorPalette(new List<RgbColor> { new RgbColor(0, 0, 0) }, null!));
     }
 
     [Fact]
