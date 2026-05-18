@@ -1,9 +1,5 @@
 ## To Add
 
-Complete transforms
-
-Add enum somewhere? Helps with the invariants section of the book.
-
 May be best to cutoff and clone at this point as the "testing reference project".
 
 Not sure if a full solution is really a good idea anyway; better to introduce small concepts
