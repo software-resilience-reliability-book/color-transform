@@ -6,7 +6,7 @@ namespace ColorTransform.Tests;
 public class RgbColorTests
 {
     [Fact]
-    public void color_with_valid_values_creates()
+    public void color_creates_when_valid()
     {
         var color = new RgbColor(0, 0, 0);
         Assert.Equal(0, color.Red);
@@ -21,7 +21,7 @@ public class RgbColorTests
     [InlineData(256, 0, 0)]
     [InlineData(0, 256, 0)]
     [InlineData(0, 0, 256)]
-    public void color_with_invalid_range_should_not_create(int r, int g, int b)
+    public void color_fails_when_values_are_out_of_range(int r, int g, int b)
     {
         Assert.Throws<ArgumentOutOfRangeException>(() => new RgbColor(r, g, b));
     }
