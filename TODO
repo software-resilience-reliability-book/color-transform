@@ -1,6 +1,0 @@
-├── src/
-│   ├── ColorTransform/
-│   └── ColorTransform.App/ 
-
-# ColorTransform.App = very light basic Blazor app that consumes the library
-and does one of two things. It's there only to illustrate integration testing.
