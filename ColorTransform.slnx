@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ColorTransform/ColorTransform.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ColorTransform.Harness/ColorTransform.Harness.csproj" />
+    <Project Path="tests/ColorTransform.Tests/ColorTransform.Tests.csproj" />
+  </Folder>
+</Solution>
