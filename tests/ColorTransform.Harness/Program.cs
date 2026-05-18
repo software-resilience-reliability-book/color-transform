@@ -1,7 +1,6 @@
 ﻿using ColorTransform.Models;
 using ColorTransform.Utilities;
 
-
 // Sandbox development test: use this to step into "FromHexString"
 var converter = new HexConverter();
 RgbColor color = converter.FromHexString("#FF5733");
