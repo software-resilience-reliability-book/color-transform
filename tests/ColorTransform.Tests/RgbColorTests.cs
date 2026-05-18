@@ -1,0 +1,28 @@
+﻿using ColorTransform.Models;
+using Xunit;
+
+namespace ColorTransform.Tests;
+
+public class RgbColorTests
+{
+    [Fact]
+    public void color_with_valid_values_creates()
+    {
+        var color = new RgbColor(0, 0, 0);
+        Assert.Equal(0, color.Red);
+        Assert.Equal(0, color.Green);
+        Assert.Equal(0, color.Blue);
+    }
+
+    [Theory]
+    [InlineData(-1, 0, 0)]
+    [InlineData(0, -1, 0)]
+    [InlineData(0, 0, -1)]
+    [InlineData(256, 0, 0)]
+    [InlineData(0, 256, 0)]
+    [InlineData(0, 0, 256)]
+    public void color_with_invalid_range_should_not_create(int r, int g, int b)
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => new RgbColor(r, g, b));
+    }
+}
