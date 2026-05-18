@@ -1,4 +1,5 @@
 using ColorTransform.Models;
+using ColorTransform.Utilities;
 
 namespace ColorTransform.Transforms;
 
@@ -14,8 +15,6 @@ public class InvertTransform : IColorTransform
     // TODO: If this is used elsewhere extract it to a static utility class.
     private static int InvertComponent(int component)
     {
-        if (component < 0) component = 0;
-        if (component > 255) component = 255;
-        return 255 - component;
+        return ColorMath.Clamp(255 - component);
     }
 }
