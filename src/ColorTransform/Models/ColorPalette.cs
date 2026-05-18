@@ -1,13 +1,18 @@
 namespace ColorTransform.Models;
 
-public record ColorPalette
+public class ColorPalette
 {
     public IReadOnlyList<RgbColor> Colors { get; }
-    public string Name { get; }
+    public string Name { 
+        get; 
+        set {
+            ArgumentException.ThrowIfNullOrEmpty(value);
+            field = value;
+        }
+    }
 
     public ColorPalette(IEnumerable<RgbColor> colors, string name)
     {
-        ArgumentException.ThrowIfNullOrEmpty(name);
         Colors = colors.ToList().AsReadOnly();
         Name = name;
     }
