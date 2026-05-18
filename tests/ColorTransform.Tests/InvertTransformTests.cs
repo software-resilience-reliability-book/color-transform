@@ -11,7 +11,9 @@ public class InvertTransformTests
     {
         var transform = new InvertTransform();
         var color = new RgbColor(100, 150, 200);
+
         var result = transform.Apply(color);
+
         Assert.Equal(155, result.Red);
         Assert.Equal(105, result.Green);
         Assert.Equal(55, result.Blue);
@@ -22,7 +24,9 @@ public class InvertTransformTests
     {
         var transform = new InvertTransform();
         var color = new RgbColor(255, 0, 0);
+
         var result = transform.Apply(color);
+
         Assert.Equal(0, result.Red);
         Assert.Equal(255, result.Green);
         Assert.Equal(255, result.Blue);
