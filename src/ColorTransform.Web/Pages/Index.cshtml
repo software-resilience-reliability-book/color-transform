@@ -2,6 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Color transform demo";
+    var hasOutput = !string.IsNullOrEmpty(Model.OutputColor);
 }
 
 <h1 class="mb-4">Color transform demo</h1>
@@ -11,51 +12,75 @@
     <div class="alert alert-warning" role="alert">@Model.ErrorMessage</div>
 }
 
-<form method="post" class="d-flex flex-column gap-3" style="max-width: 28rem;">
-    <div>
-        <label asp-for="TransformType" class="form-label">Transform</label>
-        <select asp-for="TransformType" class="form-select">
-            <option value="invert">Invert</option>
-            <option value="grayscale-average">Grayscale (Average)</option>
-            <option value="tint">Tint (white tint, 50% blend)</option>
-        </select>
-    </div>
+<div class="card transform-demo" style="max-width: 36rem;">
+    <div class="card-header">Transform a color</div>
+    <div class="card-body">
+        <form method="post">
+            <fieldset class="mb-4 border-0 p-0 m-0">
+                <legend class="float-none w-auto px-0 fs-6 fw-semibold mb-2">Transform</legend>
+                <label asp-for="TransformType" class="form-label visually-hidden">Transform</label>
+                <select asp-for="TransformType" class="form-select">
+                    <option value="invert">Invert</option>
+                    <option value="grayscale-average">Grayscale (Average)</option>
+                    <option value="tint">Tint (white tint, 50% blend)</option>
+                </select>
+            </fieldset>
 
-    <div>
-        <label asp-for="InputColor" class="form-label">Input color</label>
-        <div class="d-flex align-items-center gap-3">
-            <input type="color" asp-for="InputColor" class="form-control form-control-color" />
-            <div id="inputPreview" class="color-swatch" style="background-color: @Model.InputColor"></div>
-        </div>
-    </div>
+            <div class="row g-3 align-items-start mb-4">
+                <div class="col-md-5">
+                    <label asp-for="InputColor" class="form-label">Input color</label>
+                    <div class="color-block">
+                        <div class="d-flex align-items-center gap-2">
+                            <div id="inputSwatch" class="color-swatch" style="background-color: @Model.InputColor" aria-hidden="true"></div>
+                            <span id="inputHex" class="font-monospace text-body">@Model.InputColor</span>
+                        </div>
+                        <input type="color" asp-for="InputColor" class="form-control form-control-color" />
+                    </div>
+                </div>
 
-    <div>
-        <button type="submit" class="btn btn-primary">Go</button>
-    </div>
-</form>
+                <div class="col-md-5">
+                    <p class="form-label mb-0">Output color</p>
+                    <div class="color-block">
+                        <div class="d-flex align-items-center gap-2">
+                            @if (hasOutput)
+                            {
+                                <div class="color-swatch" style="background-color: @Model.OutputColor" aria-hidden="true"></div>
+                                <span class="font-monospace text-body">@Model.OutputColor</span>
+                            }
+                            else
+                            {
+                                <div class="color-swatch color-swatch--empty" aria-hidden="true"></div>
+                                <span class="font-monospace text-muted">—</span>
+                            }
+                        </div>
+                        <p class="form-text mb-0">
+                            @(hasOutput ? "Result of the selected transform." : "Run transform to see the result.")
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-@if (!string.IsNullOrEmpty(Model.OutputColor))
-{
-    <section class="mt-4">
-        <h2 class="h5">Output</h2>
-        <div class="d-flex align-items-center gap-3">
-            <div class="color-swatch" style="background-color: @Model.OutputColor"></div>
-            <span class="font-monospace">@Model.OutputColor</span>
-        </div>
-    </section>
-}
+            <button type="submit" class="btn btn-primary w-100 w-md-auto">Apply transform</button>
+        </form>
+    </div>
+</div>
 
 @section Scripts {
     <script>
         (function () {
             var picker = document.querySelector('input[type="color"]');
-            var preview = document.getElementById('inputPreview');
-            if (!picker || !preview) return;
-            function updatePreview() {
-                preview.style.backgroundColor = picker.value;
+            var swatch = document.getElementById('inputSwatch');
+            var hex = document.getElementById('inputHex');
+            if (!picker || !swatch || !hex) return;
+
+            function updateInputDisplay() {
+                var value = picker.value;
+                swatch.style.backgroundColor = value;
+                hex.textContent = value;
             }
-            picker.addEventListener('input', updatePreview);
-            updatePreview();
+
+            picker.addEventListener('input', updateInputDisplay);
+            updateInputDisplay();
         })();
     </script>
 }

@@ -30,9 +30,26 @@ body {
   text-align: start;
 }
 
+.color-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .color-swatch {
   width: 48px;
   height: 48px;
+  flex-shrink: 0;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.25rem;
+}
+
+.color-swatch--empty {
+  background-color: var(--bs-secondary-bg);
+  border-style: dashed;
+}
+
+.transform-pipeline-arrow {
+  min-height: 48px;
+  padding-top: 1.75rem;
 }
