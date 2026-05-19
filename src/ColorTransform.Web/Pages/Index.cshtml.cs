@@ -33,13 +33,15 @@ public class IndexModel : PageModel
             var result = new PaletteTransformer(CreateTransform(TransformType)).Transform(palette);
             OutputColor = converter.ToHexString(result.Colors[0]);
         }
-        catch (ArgumentOutOfRangeException ex)
-        {
-            ErrorMessage = ex.Message;
-        }
+        // We don't need to catch this separately because it's a subclass of ArgumentException
+        // catch (ArgumentOutOfRangeException ex)
         catch (ArgumentException ex)
         {
-            ErrorMessage = ex.Message;
+            // TODO: dev mode should show full details and possibly a stack trace
+            // Prod should only show the generic message.
+            // What's the "right" way to control message detail per environment?
+            // ErrorMessage = ex.Message;
+            ErrorMessage = "We couldn’t apply that transform."
         }
     }
 
@@ -49,6 +51,6 @@ public class IndexModel : PageModel
             "invert" => new InvertTransform(),
             "grayscale-average" => new GrayscaleTransform(GrayscaleFormula.Average),
             "tint" => new TintTransform(new RgbColor(255, 255, 255), 0.5f),
-            _ => new InvertTransform(),
+            _ => throw new ArgumentException($"Invalid transform type: {transformType}"),
         };
 }

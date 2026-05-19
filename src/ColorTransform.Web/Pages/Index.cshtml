@@ -9,7 +9,7 @@
 
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
-    <div class="alert alert-warning" role="alert">@Model.ErrorMessage</div>
+    <div class="alert alert-warning" role="alert" style="max-width: 36rem;">@Model.ErrorMessage</div>
 }
 
 <div class="card transform-demo" style="max-width: 36rem;">
@@ -23,6 +23,7 @@
                     <option value="invert">Invert</option>
                     <option value="grayscale-average">Grayscale (Average)</option>
                     <option value="tint">Tint (white tint, 50% blend)</option>
+                    <option value="fail">Failure (does not exist)</option>
                 </select>
             </fieldset>
 
