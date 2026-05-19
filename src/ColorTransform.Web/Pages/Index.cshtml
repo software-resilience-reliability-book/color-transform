@@ -1,0 +1,61 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Color transform demo";
+}
+
+<h1 class="mb-4">Color transform demo</h1>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-warning" role="alert">@Model.ErrorMessage</div>
+}
+
+<form method="post" class="d-flex flex-column gap-3" style="max-width: 28rem;">
+    <div>
+        <label asp-for="TransformType" class="form-label">Transform</label>
+        <select asp-for="TransformType" class="form-select">
+            <option value="invert">Invert</option>
+            <option value="grayscale-average">Grayscale (Average)</option>
+            <option value="tint">Tint (white tint, 50% blend)</option>
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="InputColor" class="form-label">Input color</label>
+        <div class="d-flex align-items-center gap-3">
+            <input type="color" asp-for="InputColor" class="form-control form-control-color" />
+            <div id="inputPreview" class="color-swatch" style="background-color: @Model.InputColor"></div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">Go</button>
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.OutputColor))
+{
+    <section class="mt-4">
+        <h2 class="h5">Output</h2>
+        <div class="d-flex align-items-center gap-3">
+            <div class="color-swatch" style="background-color: @Model.OutputColor"></div>
+            <span class="font-monospace">@Model.OutputColor</span>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    <script>
+        (function () {
+            var picker = document.querySelector('input[type="color"]');
+            var preview = document.getElementById('inputPreview');
+            if (!picker || !preview) return;
+            function updatePreview() {
+                preview.style.backgroundColor = picker.value;
+            }
+            picker.addEventListener('input', updatePreview);
+            updatePreview();
+        })();
+    </script>
+}
