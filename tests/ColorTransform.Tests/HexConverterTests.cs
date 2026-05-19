@@ -10,7 +10,9 @@ public class HexConverterTests
     public void hex_string_creates_rgb_color_when_valid()
     {
         var converter = new HexConverter();
+
         var color = converter.FromHexString("#000000");
+
         Assert.Equal(0, color.Red);
         Assert.Equal(0, color.Green);
         Assert.Equal(0, color.Blue);
