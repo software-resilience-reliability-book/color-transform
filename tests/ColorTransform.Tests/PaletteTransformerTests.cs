@@ -33,9 +33,11 @@ public class PaletteTransformerTests
         var result = transformer.Transform(palette);
 
         Assert.Equal(2, result.Colors.Count);
+
         Assert.Equal(1, result.Colors[0].Red);
         Assert.Equal(1, result.Colors[0].Green);
         Assert.Equal(1, result.Colors[0].Blue);
+
         Assert.Equal(101, result.Colors[1].Red);
         Assert.Equal(102, result.Colors[1].Green);
         Assert.Equal(103, result.Colors[1].Blue);
