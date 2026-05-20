@@ -11,11 +11,11 @@ public class HexConverterTests
     {
         var converter = new HexConverter();
 
-        var color = converter.FromHexString("#000000");
+        var color = converter.FromHexString("#FF5511");
 
-        Assert.Equal(0, color.Red);
-        Assert.Equal(0, color.Green);
-        Assert.Equal(0, color.Blue);
+        Assert.Equal(255, color.Red);
+        Assert.Equal(85, color.Green);
+        Assert.Equal(17, color.Blue);
     }
 
     [Fact]
