@@ -21,6 +21,11 @@ public class PaletteTransformer
 
     public ColorPalette Transform(ColorPalette palette)
     {
-        return new ColorPalette(palette.Colors.Select(_transform.Apply), palette.Name);
+        var transformedColors = new List<RgbColor>();
+        foreach (var color in palette.Colors)
+        {
+            transformedColors.Add(_transform.Apply(color));
+        }
+        return new ColorPalette(transformedColors, palette.Name);
     }
 }
