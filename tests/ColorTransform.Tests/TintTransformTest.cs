@@ -1,7 +1,6 @@
 
 using ColorTransform.Models;
 using ColorTransform.Transforms;
-using Xunit;
 
 namespace ColorTransform.Tests;
 

@@ -1,13 +1,26 @@
 using ColorTransform.Models;
 using ColorTransform.Utilities;
-using Xunit;
 
 namespace ColorTransform.Tests;
 
 public class HexConverterTests
 {
     [Fact]
-    public void hex_string_creates_correct_rbg_component_values()
+    public void hex_string_fails_when_not_six_characters()
+    {
+        var converter = new HexConverter();
+        Assert.Throws<ArgumentException>(() => converter.FromHexString("#00000"));
+    }
+
+    [Fact]
+    public void hex_string_fails_when_contains_invalid_hex_characters()
+    {
+        var converter = new HexConverter();
+        Assert.Throws<ArgumentException>(() => converter.FromHexString("#00000G"));
+    }
+
+    [Fact]
+    public void hex_string_with_leading_hash_creates_correct_rbg_component_values()
     {
         var converter = new HexConverter();
 
@@ -19,17 +32,15 @@ public class HexConverterTests
     }
 
     [Fact]
-    public void hex_string_fails_when_not_six_characters()
+    public void hex_string_without_leading_hash_creates_correct_rbg_component_values()
     {
         var converter = new HexConverter();
-        Assert.Throws<ArgumentException>(() => converter.FromHexString("#00000"));
-    }
 
-    [Fact]
-    public void hex_string_fails_when_contains_invalid_characters()
-    {
-        var converter = new HexConverter();
-        Assert.Throws<ArgumentException>(() => converter.FromHexString("#00000G"));
+        var color = converter.FromHexString("FF5511");
+
+        Assert.Equal(255, color.Red);
+        Assert.Equal(85, color.Green);
+        Assert.Equal(17, color.Blue);
     }
 
     [Fact]
