@@ -7,7 +7,7 @@ namespace ColorTransform.Tests;
 public class HexConverterTests
 {
     [Fact]
-    public void hex_string_creates_rgb_color_when_valid()
+    public void hex_string_creates_correct_rbg_component_values()
     {
         var converter = new HexConverter();
 
