@@ -10,7 +10,7 @@ public class GrayscaleTransform(GrayscaleFormula formula = GrayscaleFormula.Aver
         {
             GrayscaleFormula.Average => ToAverage(color),
             GrayscaleFormula.Luminance => ToLuminance(color),
-            _ => throw new ArgumentOutOfRangeException(nameof(formula)),
+            _ => throw new ArgumentException(nameof(formula)),
         };
         return new RgbColor(grayscale, grayscale, grayscale);
     }
