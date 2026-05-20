@@ -44,7 +44,7 @@ public class HexConverterTests
     }
 
     [Fact]
-    public void created_hex_string_includes_hash_when_requested()
+    public void rgb_color_creates_correct_hex_string_with_requested_hash()
     {
         var converter = new HexConverter();
         var hex = converter.ToHexString(new RgbColor(10, 100, 255), true);
@@ -52,7 +52,7 @@ public class HexConverterTests
     }
 
     [Fact]
-    public void created_hex_string_omits_hash_when_requested()
+    public void rgb_color_creates_correct_hex_string_without_requested_hash()
     {
         var converter = new HexConverter();
         var hex = converter.ToHexString(new RgbColor(10, 100, 255), false);
