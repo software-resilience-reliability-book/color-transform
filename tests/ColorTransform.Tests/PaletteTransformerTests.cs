@@ -22,15 +22,16 @@ public class PaletteTransformerTests
     [Fact]
     public void palette_transformer_applies_transform_to_each_color()
     {
-        var palette = new ColorPalette(
-            [
-                new RgbColor(0, 0, 0),
-                new RgbColor(100, 101, 102),
-            ],
-            "My Palette");
+        ColorPalette palette = new ColorPalette(
+        [
+            new RgbColor(0, 0, 0),
+            new RgbColor(100, 101, 102),
+        ],
+        "My Palette");
+        IColorTransform transform = new ColorTransformFake();
+        PaletteTransformer transformer = new PaletteTransformer(transform);
 
-        var transformer = new PaletteTransformer(new ColorTransformFake());
-        var result = transformer.Transform(palette);
+        ColorPalette result = transformer.Transform(palette); 
 
         Assert.Equal(2, result.Colors.Count);
 
@@ -46,10 +47,11 @@ public class PaletteTransformerTests
     [Fact]
     public void palette_transformer_preserves_palette_name()
     {
-        var transformer = new PaletteTransformer(new ColorTransformFake());
-        var palette = new ColorPalette([new RgbColor(0, 0, 0)], "Original");
+        ColorPalette palette = new ColorPalette([new RgbColor(0, 0, 0)], "Original");
+        IColorTransform transform = new ColorTransformFake();
+        PaletteTransformer transformer = new PaletteTransformer(transform);
 
-        var result = transformer.Transform(palette);
+        ColorPalette result = transformer.Transform(palette);
 
         Assert.Equal("Original", result.Name);
     }
@@ -57,10 +59,11 @@ public class PaletteTransformerTests
     [Fact]
     public void palette_transformer_returns_empty_palette_when_given_empty_palette()
     {
-        var transformer = new PaletteTransformer(new ColorTransformFake());
-        var palette = new ColorPalette([], "Empty");
+        ColorPalette palette = new ColorPalette([], "Empty");
+        IColorTransform transform = new ColorTransformFake();
+        PaletteTransformer transformer = new PaletteTransformer(transform);
 
-        var result = transformer.Transform(palette);
+        ColorPalette result = transformer.Transform(palette);
 
         Assert.Empty(result.Colors);
         Assert.Equal("Empty", result.Name);
