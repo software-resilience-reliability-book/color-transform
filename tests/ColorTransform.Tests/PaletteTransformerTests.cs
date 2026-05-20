@@ -6,12 +6,12 @@ namespace ColorTransform.Tests;
 public class PaletteTransformerTests
 {
     /*
-    This mock is here to decouple the actual transform from the test rather than
-    tie it to any one implementation. For example: we could have used "InvertTransform"
-    instead of "ColorTransformMock", but then these tests all count on the invert transform
-    working correctly, and tests are not isolated to the system under test (PaletteTransformer).
+        This class is here to decouple the actual transform from the test rather than
+        tie it to any one implementation. For example: we could have used "InvertTransform"
+        instead of "ColorTransformFake", but then these tests all count on the invert transform
+        working correctly, and tests are not isolated to the system under test (PaletteTransformer).
     */
-    class ColorTransformMock : IColorTransform
+    class ColorTransformFake : IColorTransform 
     {
         public RgbColor Apply(RgbColor color)
         {
@@ -22,7 +22,6 @@ public class PaletteTransformerTests
     [Fact]
     public void palette_transformer_applies_transform_to_each_color()
     {
-        var transformer = new PaletteTransformer(new ColorTransformMock());
         var palette = new ColorPalette(
             [
                 new RgbColor(0, 0, 0),
@@ -30,6 +29,7 @@ public class PaletteTransformerTests
             ],
             "My Palette");
 
+        var transformer = new PaletteTransformer(new ColorTransformFake());
         var result = transformer.Transform(palette);
 
         Assert.Equal(2, result.Colors.Count);
