@@ -46,7 +46,7 @@ public class PaletteTransformerTests
     [Fact]
     public void palette_transformer_preserves_palette_name()
     {
-        var transformer = new PaletteTransformer(new ColorTransformMock());
+        var transformer = new PaletteTransformer(new ColorTransformFake());
         var palette = new ColorPalette([new RgbColor(0, 0, 0)], "Original");
 
         var result = transformer.Transform(palette);
@@ -57,7 +57,7 @@ public class PaletteTransformerTests
     [Fact]
     public void palette_transformer_returns_empty_palette_when_given_empty_palette()
     {
-        var transformer = new PaletteTransformer(new ColorTransformMock());
+        var transformer = new PaletteTransformer(new ColorTransformFake());
         var palette = new ColorPalette([], "Empty");
 
         var result = transformer.Transform(palette);
