@@ -2,12 +2,12 @@
 @inject IConfiguration Configuration
 @model IndexModel
 @{
-    ViewData["Title"] = "Color transform demo";
-    ViewData["AppName"] = Configuration["App:Name"];
+    ViewData["Organization"] = Configuration["App:Organization"];
+    ViewData["Title"] = Configuration["App:Title"];
     var hasOutput = !string.IsNullOrEmpty(Model.OutputColor);
 }
 
-<h1 class="mb-4">Color transform demo</h1>
+<h1 class="mb-4">@ViewData["Title"]</h1>
 
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
