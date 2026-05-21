@@ -40,8 +40,8 @@ public class IndexModel : PageModel
             // TODO: dev mode should show full details and possibly a stack trace
             // Prod should log the error but only show the generic message.
             // What's the "right" way to control message detail per environment?
-            // ErrorMessage = ex.Message;
-            ErrorMessage = "We couldn’t apply that transform."
+            ErrorMessage = ex.Message;
+            // ErrorMessage = "We couldn’t apply that transform.";
         }
     }
 

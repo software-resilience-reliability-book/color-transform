@@ -1,7 +1,9 @@
 ﻿@page
+@inject IConfiguration Configuration
 @model IndexModel
 @{
     ViewData["Title"] = "Color transform demo";
+    ViewData["AppName"] = Configuration["App:Name"];
     var hasOutput = !string.IsNullOrEmpty(Model.OutputColor);
 }
 
