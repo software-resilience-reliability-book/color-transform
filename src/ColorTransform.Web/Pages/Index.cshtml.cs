@@ -34,8 +34,6 @@ public class IndexModel(IErrorLog errorLog) : PageModel
             var result = new PaletteTransformer(CreateTransform(TransformType)).Transform(palette);
             OutputColor = converter.ToHexString(result.Colors[0]);
         }
-        // We don't need to catch this separately because it's a subclass of ArgumentException
-        // catch (ArgumentOutOfRangeException ex)
         catch (ArgumentException ex)
         {
             ErrorMessage = "We couldn’t apply that transform.";
