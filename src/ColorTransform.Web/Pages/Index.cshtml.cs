@@ -2,12 +2,13 @@ using ColorTransform;
 using ColorTransform.Models;
 using ColorTransform.Transforms;
 using ColorTransform.Utilities;
+using ColorTransform.Web.ErrorLogging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ColorTransform.Web.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel(IErrorLog errorLog) : PageModel
 {
     [BindProperty]
     public string TransformType { get; set; } = "invert";
@@ -37,11 +38,8 @@ public class IndexModel : PageModel
         // catch (ArgumentOutOfRangeException ex)
         catch (ArgumentException ex)
         {
-            // TODO: dev mode should show full details and possibly a stack trace
-            // Prod should log the error but only show the generic message.
-            // What's the "right" way to control message detail per environment?
-            ErrorMessage = ex.Message;
-            // ErrorMessage = "We couldn’t apply that transform.";
+            ErrorMessage = "We couldn’t apply that transform.";
+            errorLog.Record($"Invalid transform: {TransformType}", ex);
         }
     }
 
