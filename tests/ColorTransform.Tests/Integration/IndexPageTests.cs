@@ -21,9 +21,19 @@ public class IndexPageTests : IClassFixture<WebApplicationFactory<Program>>
     /*
     This test creates a server, runs the ColorTransform.Web application, and
     then sends a POST request to the / endpoint with the "invert" transform
-    type. This mimics what happens when the user submits the form via a button click,
-    but there is no browser involved in this test. It is not simulating the entire environment,
-    as with an E2E test.
+    type. This mimics what happens when the user submits the form via a button
+    click, but there is no browser involved in this test. It is not simulating
+    the entire environment, as with an E2E test. It tests that the following
+    components are set up to correctly work together:
+
+    HTTP POST /
+        → ASP.NET Core server receives the request and uses routing to pick the right page
+        → Razor Pages maps the URL to the Index page and binds the form fields to IndexModel
+        → Server calls IndexModel.OnPost() to run the submit logic with values provided in test
+        → IndexModel uses the ColorTransform library (HexConverter, PaletteTransformer, and the chosen transform) to compute the new color
+        → The server renders Index.cshtml with the updated model
+        → The server returns an HTTP response containing HTML
+        → The test client reads the response HTML and checks that it includes the expected output color
     */
     [Fact]
     public async Task post_with_invert_returns_transformed_color_string_in_returned_html()
