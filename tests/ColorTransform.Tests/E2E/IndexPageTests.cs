@@ -102,18 +102,11 @@ public class IndexPageTests : IClassFixture<ColorTransformWebApplication>, IAsyn
     }
 
     /*
-    This test runs the real web application in a separate process, drives the page
-    through a headless browser, and checks what the user sees in the DOM. Unlike the
-    integration test, it does not use HttpClient or parse antiforgery tokens—the
-    browser submits the form the same way a user would.
-
-    The user opens the Index page in a browser
-        → The user selects the Invert transform from the dropdown
-        → The user picks an input color
-        → The user clicks Apply transform (the browser sends the POST, including antiforgery)
-        → The server runs the same page handler and library code as in production
-        → The browser re-renders the page
-        → The test reads the output color preview element in the live DOM
+    This test runs the real web application in a separate process, drives the
+    page through a headless browser, and checks what the user sees in the DOM.
+    Unlike the integration test, it uses an actual browser to simulate the
+    user's actions. Even though you don't see this browser, it is running on the
+    machine.
     */
     [Fact]
     public async Task user_applies_invert_and_sees_transformed_color_in_output_preview()

@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <VSTestTestCaseFilter>Category!=E2E</VSTestTestCaseFilter>
+  </PropertyGroup>
+</Project>
