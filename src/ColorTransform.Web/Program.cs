@@ -22,3 +22,7 @@ app.MapRazorPages()
    .WithStaticAssets();
 
 app.Run();
+
+// Make Program visible to the integration tests so that they can instantiate it.
+// Otherwise the Program class will be scoped to "internal".
+public partial class Program { }
