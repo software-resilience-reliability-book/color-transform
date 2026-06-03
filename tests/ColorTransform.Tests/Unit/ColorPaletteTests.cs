@@ -1,6 +1,6 @@
 using ColorTransform.Models;
 
-namespace ColorTransform.Tests;
+namespace ColorTransform.Tests.Unit;
 
 public class ColorPaletteTests
 {
@@ -15,14 +15,14 @@ public class ColorPaletteTests
     [Fact]
     public void palette_fails_when_name_is_null()
     {
-        Assert.Throws<ArgumentNullException>(() => 
+        Assert.Throws<ArgumentNullException>(() =>
             new ColorPalette(new List<RgbColor> { new RgbColor(0, 0, 0) }, null!));
     }
 
     [Fact]
     public void palette_fails_when_name_is_empty()
     {
-        Assert.Throws<ArgumentException>(() => 
+        Assert.Throws<ArgumentException>(() =>
             new ColorPalette(new List<RgbColor> { new RgbColor(0, 0, 0) }, ""));
     }
 }

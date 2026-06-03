@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace ColorTransform.Tests;
+namespace ColorTransform.Tests.Integration;
 
 public class IndexPageTests : IClassFixture<WebApplicationFactory<Program>>
 {

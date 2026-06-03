@@ -1,7 +1,7 @@
 using ColorTransform.Models;
 using ColorTransform.Transforms;
 
-namespace ColorTransform.Tests;
+namespace ColorTransform.Tests.Unit;
 
 public class PaletteTransformerTests
 {
@@ -11,14 +11,14 @@ public class PaletteTransformerTests
         instead of "ColorTransformFake", but then these tests all count on the invert transform
         working correctly, and tests are not isolated to the system under test (PaletteTransformer).
     */
-    class ColorTransformFake : IColorTransform 
+    class ColorTransformFake : IColorTransform
     {
         public RgbColor Apply(RgbColor color)
         {
             return new RgbColor(color.Red + 1, color.Green + 1, color.Blue + 1);
         }
     }
-    
+
     [Fact]
     public void palette_transformer_applies_transform_to_each_color()
     {
@@ -31,7 +31,7 @@ public class PaletteTransformerTests
         IColorTransform transform = new ColorTransformFake();
         PaletteTransformer transformer = new PaletteTransformer(transform);
 
-        ColorPalette result = transformer.Transform(palette); 
+        ColorPalette result = transformer.Transform(palette);
 
         Assert.Equal(2, result.Colors.Count);
 

@@ -1,7 +1,7 @@
 using ColorTransform.Models;
 using ColorTransform.Transforms;
 
-namespace ColorTransform.Tests;
+namespace ColorTransform.Tests.Unit;
 
 public class GrayscaleTransformTests
 {
@@ -47,9 +47,9 @@ public class GrayscaleTransformTests
         Assert.Equal(0, result.Blue);
     }
 
-     /*
-    LUMINANCE FORMULA TESTS:
-    */
+    /*
+   LUMINANCE FORMULA TESTS:
+   */
     [Fact]
     public void grayscale_luminance_transform_works_with_all_channels_equal()
     {

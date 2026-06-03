@@ -1,6 +1,6 @@
 ﻿using ColorTransform.Models;
 
-namespace ColorTransform.Tests;
+namespace ColorTransform.Tests.Unit;
 
 public class RgbColorTests
 {

@@ -1,7 +1,7 @@
 using ColorTransform.Models;
 using ColorTransform.Utilities;
 
-namespace ColorTransform.Tests;
+namespace ColorTransform.Tests.Unit;
 
 public class HexConverterTests
 {

@@ -2,7 +2,7 @@
 using ColorTransform.Models;
 using ColorTransform.Transforms;
 
-namespace ColorTransform.Tests;
+namespace ColorTransform.Tests.Unit;
 
 public class TintTransformTests
 {

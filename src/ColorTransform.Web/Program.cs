@@ -13,7 +13,9 @@ builder.Services.AddSingleton<IErrorLog>(_ => new FileErrorLog(errorLogPath));
 builder.Services.AddRazorPages();
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsEnvironment("Testing"))
+    app.UseHttpsRedirection();
+
 app.UseRouting();
 app.UseAuthorization();
 
